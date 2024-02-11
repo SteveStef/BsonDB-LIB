@@ -1,5 +1,7 @@
 const fetch = require('node-fetch');
 
+const server = "https://bsondb.up.railway.app";
+
 const req = async (url, options) => {
   try {
     const response = await fetch(url, options);
@@ -19,7 +21,7 @@ async function createDatabase() {
     },
     body: JSON.stringify(body),
   };
-  const url = "https://bsondb.onrender.com/api/createdb";
+  const url = server+"/api/createdb";
   const data = await req(url, requestOptions)
   return data;
 }
@@ -32,7 +34,7 @@ async function createTable(id, table) {
     },
     body: JSON.stringify(table),
   };
-  const url = "https://bsondb.onrender.com/api/add-table/"+id;
+  const url = server+"/api/add-table/"+id;
   const data = await req(url, requestOptions)
   return data;
 }
@@ -46,7 +48,7 @@ async function updateFieldInTable(id, table, entryId, field) {
     },
     body: JSON.stringify(field),
   };
-  const url = `https://bsondb.onrender.com/api/update-field/${id}/${table}/${entryId}`;
+  const url = `${server}/api/update-field/${id}/${table}/${entryId}`;
   const response = await req(url, requestOptions);
   return response;
 }
@@ -59,7 +61,7 @@ async function updateEntryInTable(id, table, entryId, entry) {
     },
     body: JSON.stringify(entry),
   };
-  const url = `https://bsondb.onrender.com/api/update-entry/${id}/${table}/${entryId}`;
+  const url = `${server}/api/update-entry/${id}/${table}/${entryId}`;
   const response = await req(url, requestOptions);
   return response;
 }
@@ -85,7 +87,7 @@ async function addEntry(id, table, entry) {
     },
     body: JSON.stringify(entry),
   };
-  const url = `https://bsondb.onrender.com/api/add-entry/${id}/${table}`;
+  const url = `${server}/api/add-entry/${id}/${table}`;
   const response = await req(url, requestOptions);
   return response;
 }
@@ -97,7 +99,7 @@ async function deleteTable(id, table) {
       'Content-Type': 'application/json',
     }
   };
-  const url = `https://bsondb.onrender.com/api/delete-table/${id}/${table}`;
+  const url = `${server}/api/delete-table/${id}/${table}`;
   console.log(url);
   const response = await req(url, requestOptions);
   return response;
@@ -112,7 +114,7 @@ async function GetDatabase(id) {
         'Content-Type': 'application/json',
       }
     };
-    const url = `https://bsondb.onrender.com/api/readdb/${id}`;
+    const url = `${server}/api/readdb/${id}`;
     const response = await req(url, requestOptions);
     return response;
   } catch(error) {
@@ -128,7 +130,7 @@ async function GetTable(id, tableName) {
         'Content-Type': 'application/json',
       }
     };
-    const url = `https://bsondb.onrender.com/api/${id}/${tableName}`;
+    const url = `${server}/api/${id}/${tableName}`;
     const response = await req(url, requestOptions);
     return response;
   } catch(error) {
@@ -144,7 +146,7 @@ async function GetEntry(id, tableName, entryId) {
         'Content-Type': 'application/json',
       }
     };
-    const url = `https://bsondb.onrender.com/api/${id}/${tableName}/${entryId}`;
+    const url = `${server}/api/${id}/${tableName}/${entryId}`;
     const response = await req(url, requestOptions);
     return response;
   } catch(error) {
@@ -160,7 +162,7 @@ async function GetField(id, tableName, entryId, field) {
         'Content-Type': 'application/json',
       }
     };
-    const url = `https://bsondb.onrender.com/api/${id}/${tableName}/${entryId}/${field}`;
+    const url = `${server}/api/${id}/${tableName}/${entryId}/${field}`;
     const response = await req(url, requestOptions);
     return response;
   } catch(error) {
@@ -264,6 +266,13 @@ async function DeleteBsonDatabase(id) {
     return null;
   }
 }
+
+async function test() {
+  const db = await GetDatabase("123");
+  console.log(db);
+}
+
+test();
 
 const bson = {
   CreateBsonDB,
