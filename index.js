@@ -267,13 +267,6 @@ async function DeleteBsonDatabase(id) {
   }
 }
 
-async function test() {
-  const db = await GetDatabase("123");
-  console.log(db);
-}
-
-test();
-
 const bson = {
   CreateBsonDB,
   CreateBsonTable,
