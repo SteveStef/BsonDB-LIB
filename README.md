@@ -1,6 +1,12 @@
 
 # Introduction
 
+BSON Database API Documentation
+This README provides an overview of the BSON Database library, 
+including the available functions and their usage. 
+The API is designed to interact with a remote server hosting BSON 
+databases, providing CRUD operations for databases, tables, and entries.
+
 This is an library to make using my bson api easy 
 BsonDB-api is a non-relational database written in golang 
 
@@ -12,68 +18,122 @@ BsonDB-api is a non-relational database written in golang
 
 `node`
 
-** all functions are async
+# All Functions
 
 ```js
-createDatabase(): Creates a new database.
-    No parameters are needed.
-    Returns an id that is used to reference the database in the future DO NOT LOSE IT!
+/**
+ * Fetches the database with the given ID from the remote server.
+ * @async
+ * @function
+ * @param {string} id - The unique identifier of the database.
+ * @returns {Promise<Object|null>} A promise that resolves to the database object or null if an error occurs.
+ */
+function GetDatabase(id) { /* ... */ }
 
-createTable(id, table, requires): Creates a new table within a database.
-    id: A string representing the database ID.
-    table: a string representing the name of the table. Ex. "users".
-    requires: an array of string representing the types of fields. Ex. ["email", "password"].
-    Returns an object containing a message on if it was successful.
+/**
+ * Retrieves a specific table within a database.
+ * @async
+ * @function
+ * @param {string} id - The unique identifier of the database.
+ * @param {string} tableName - The name of the table to retrieve.
+ * @returns {Promise<Object|null>} A promise that resolves to the table object or null if an error occurs.
+ */
+function GetTable(id, tableName) { /* ... */ }
 
-updateFieldInTable(id, table, entryId, field): Updates a specific field in an entry of a table.
-    id: A string representing the database ID.
-    table: A string representing the table name.
-    entryId: A string representing the entry ID think of this as an identifier for a user entry.
-    field: An object with a single key-value pair representing the field to update.
-    Returns an object containing a message on if it was successful.
+/**
+ * Fetches a particular entry from a table within a database.
+ * @async
+ * @function
+ * @param {string} id - The unique identifier of the database.
+ * @param {string} tableName - The name of the table containing the entry.
+ * @param {string} entryId - The unique identifier of the entry within the table.
+ * @returns {Promise<Object|null>} A promise that resolves to the entry object or null if an error occurs.
+ */
+function GetEntry(id, tableName, entryId) { /* ... */ }
 
-updateEntryInTable(id, table, entryId, entry): Updates an entire entry in a table.
-    id: A string representing the database ID.
-    table: A string representing the table name.
-    entryId: A string representing the entry ID.
-    entry: An object representing the updated entry data.
-    Returns a Promise that resolves to the data returned from the API upon successful update of the entry.
+/**
+ * Obtains a specific field value from an entry within a table in a database.
+ * @async
+ * @function
+ * @param {string} id - The unique identifier of the database.
+ * @param {string} tableName - The name of the table containing the entry.
+ * @param {string} entryId - The unique identifier of the entry within the table.
+ * @param {string} field - The name of the field to retrieve.
+ * @returns {Promise<Object|null>} A promise that resolves to the field value or null if an error occurs.
+ */
+function GetField(id, tableName, entryId, field) { /* ... */ }
 
-deleteDatabase(id): Deletes a database.
-    id: A string representing the database ID.
-    Returns a Promise that resolves to the data returned from the API upon successful deletion of the database.
+/**
+ * Creates a new BSON database and returns its ID.
+ * @async
+ * @function
+ * @returns {Promise<string|null>} A promise that resolves to the newly created database ID or null if an error occurs.
+ */
+function CreateBsonDB() { /* ... */ }
 
-addEntry(id, table, entry): Adds an entry to a table.
-    id: A string representing the database ID.
-    table: A string representing the table name.
-    entry: An object representing the entry data to be added.
-    Returns a Promise that resolves to the data returned from the API upon successful addition of the entry.
+/**
+ * Creates a new table within a database with specified required fields.
+ * @async
+ * @function
+ * @param {string} id - The unique identifier of the database.
+ * @param {string} tableName - The name of the table to create.
+ * @param {Array<string>} requiredFields - An array of strings specifying the required fields for the table.
+ * @returns {Promise<Object|null>} A promise that resolves to the table creation result or null if an error occurs.
+ */
+function CreateBsonTable(id, tableName, requiredFields) { /* ... */ }
 
-deleteTable(id, table): Deletes a table from a database.
-    id: A string representing the database ID.
-    table: A string representing the table name.
-    Returns a Promise that resolves to the data returned from the API upon successful deletion of the table.
+/**
+ * Adds a new entry to a table within a database.
+ * @async
+ * @function
+ * @param {string} id - The unique identifier of the database.
+ * @param {string} tableName - The name of the table to add the entry to.
+ * @param {string} entryId - The unique identifier for the new entry.
+ * @param {Object} entry - An object representing the entry with key-value pairs.
+ * @returns {Promise<Object|null>} A promise that resolves to the entry addition result or null if an error occurs.
+ */
+function AddBsonEntry(id, tableName, entryId, entry) { /* ... */ }
 
-GetDatabase(id): Retrieves information about a database.
-    id: A string representing the database ID.
-    Returns a Promise that resolves to the data returned from the API upon successful retrieval of the database information.
+/**
+ * Updates a specific field in an entry within a table in a database.
+ * @async
+ * @function
+ * @param {string} id - The unique identifier of the database.
+ * @param {string} tableName - The name of the table containing the entry.
+ * @param {string} entryId - The unique identifier of the entry within the table.
+ * @param {Object} field - An object with one property representing the updated field and its value.
+ * @returns {Promise<Object|null>} A promise that resolves to the field update result or null if an error occurs.
+ */
+function UpdateBsonField(id, tableName, entryId, field) { /* ... */ }
 
-GetTable(id, tableName): Retrieves information about a table within a database.
-    id: A string representing the database ID.
-    tableName: A string representing the table name.
-    Returns a Promise that resolves to the data returned from the API upon successful retrieval of the table information.
+/**
+ * Updates an entire entry within a table in a database.
+ * @async
+ * @function
+ * @param {string} id - The unique identifier of the database.
+ * @param {string} tableName - The name of the table containing the entry.
+ * @param {string} entryId - The unique identifier of the entry within the table.
+ * @param {Object} entry - An object representing the updated entry with key-value pairs.
+ * @returns {Promise<Object|null>} A promise that resolves to the entry update result or null if an error occurs.
+ */
+function UpdateBsonEntry(id, tableName, entryId, entry) { /* ... */ }
 
-GetEntry(id, tableName, entryId): Retrieves an entry from a table within a database.
-    id: A string representing the database ID.
-    tableName: A string representing the table name.
-    entryId: A string representing the entry ID.
-    Returns a Promise that resolves to the data returned from the API upon successful retrieval of the entry.
+/**
+ * Deletes a table from a database.
+ * @async
+ * @function
+ * @param {string} id - The unique identifier of the database.
+ * @param {string} tableName - The name of the table to delete.
+ * @returns {Promise<Object|null>} A promise that resolves to the table deletion result or null if an error occurs.
+ */
+function DeleteBsonTable(id, tableName) { /* ... */ }
 
-GetField(id, tableName, entryId, field): Retrieves a specific field from an entry in a table within a database.
-    id: A string representing the database ID.
-    tableName: A string representing the table name.
-    entryId: A string representing the entry ID.
-    field: A string representing the field name.
-    Returns a Promise that resolves to the data returned from the API upon successful retrieval of the field.
+/**
+ * Deletes a database.
+ * @async
+ * @function
+ * @param {string} id - The unique identifier of the database.
+ * @returns {Promise<Object|null>} A promise that resolves to the database deletion result or null if an error occurs.
+ */
+function DeleteBsonDatabase(id) { /* ... */ }
 ```
-
