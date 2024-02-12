@@ -73,7 +73,7 @@ async function deleteDatabase(id) {
       'Content-Type': 'application/json',
     }
   };
-  const url = `https://bsondb.onrender.com/api/deletedb/${id}`;
+  const url = `${server}/api/deletedb/${id}`;
   const response = await req(url, requestOptions);
   return response;
 }
