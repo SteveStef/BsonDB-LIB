@@ -1,284 +1,91 @@
 const fetch = require('node-fetch');
-
 const server = "https://bsondb.up.railway.app";
+const defaultHeaders = {'Content-Type': 'application/json'};
 
-const req = async (url, options) => {
+const apiRequest = async (method, path, body = null) => {
+  const requestOptions = {
+    method,
+    headers: defaultHeaders,
+    ...(body && { body: JSON.stringify(body) })
+  };
+  const url = `${server}${path}`;
   try {
-    const response = await fetch(url, options);
-    const data = await response.json();
-    return data;
+    const response = await fetch(url, requestOptions);
+    return await response.json();
   } catch (error) {
-    return error;
+    throw error;
   }
 };
 
 async function createDatabase() {
-  const body = {tables: []};
-  const requestOptions = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(body),
-  };
-  const url = server+"/api/createdb";
-  const data = await req(url, requestOptions)
-  return data;
+  return await apiRequest('POST', '/api/createdb', { tables: [] });
 }
 
-async function createTable(id, table) {
-  const requestOptions = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(table),
-  };
-  const url = server+"/api/add-table/"+id;
-  const data = await req(url, requestOptions)
-  return data;
+async function createTable(id, tableName, fields) {
+  let table = { name: tableName, requires: fields, entries: [] };
+  return await apiRequest('POST', `/api/add-table/${id}`, table);
 }
 
-
-async function updateFieldInTable(id, table, entryId, field) {
-  const requestOptions = {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(field),
-  };
-  const url = `${server}/api/update-field/${id}/${table}/${entryId}`;
-  const response = await req(url, requestOptions);
-  return response;
+async function updateField(id, table, entryId, field) {
+  let entryField = {key: Object.keys(field)[0], value: Object.values(field)[0]};
+  return await apiRequest('PUT', `/api/update-field/${id}/${table}/${entryId}`, entryField);
 }
 
-async function updateEntryInTable(id, table, entryId, entry) {
-  const requestOptions = {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(entry),
-  };
-  const url = `${server}/api/update-entry/${id}/${table}/${entryId}`;
-  const response = await req(url, requestOptions);
-  return response;
+async function updateEntry(id, table, entryId, entry) {
+  let fields = [];
+  for (const key in entry) {
+    fields.push({key: key, value: entry[key]});
+  }
+  let entryData = {id: entryId, fields: fields};
+  return await apiRequest('PUT', `/api/update-entry/${id}/${table}/${entryId}`, entryData);
 }
 
 async function deleteDatabase(id) {
-  const requestOptions = {
-    method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/json',
-    }
-  };
-  const url = `${server}/api/deletedb/${id}`;
-  const response = await req(url, requestOptions);
-  return response;
+  return await apiRequest('DELETE', `/api/deletedb/${id}`);
 }
 
-
-async function addEntry(id, table, entry) {
-  const requestOptions = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(entry),
-  };
-  const url = `${server}/api/add-entry/${id}/${table}`;
-  const response = await req(url, requestOptions);
-  return response;
+async function addEntry(id, tableName, entryId, entry) {
+  let fields = [];
+  for (const key in entry) {
+    fields.push({key: key, value: entry[key]});
+  }
+  return await apiRequest('POST', `/api/add-entry/${id}/${tableName}`, {id: entryId, fields: fields});
 }
 
 async function deleteTable(id, table) {
-  const requestOptions = {
-    method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/json',
-    }
-  };
-  const url = `${server}/api/delete-table/${id}/${table}`;
-  console.log(url);
-  const response = await req(url, requestOptions);
-  return response;
+  return await apiRequest('DELETE', `/api/delete-table/${id}/${table}`);
 }
 
-
-async function GetDatabase(id) {
-  try {
-    const requestOptions = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      }
-    };
-    const url = `${server}/api/readdb/${id}`;
-    const response = await req(url, requestOptions);
-    return response;
-  } catch(error) {
-    return null;
-  }
+async function get(path) {
+  return await apiRequest('GET', path);
 }
 
-async function GetTable(id, tableName) {
-  try {
-    const requestOptions = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      }
-    };
-    const url = `${server}/api/${id}/${tableName}`;
-    const response = await req(url, requestOptions);
-    return response;
-  } catch(error) {
-    return null;
-  }
+async function getDatabase(id) {
+  return await get(`/api/readdb/${id}`);
 }
 
-async function GetEntry(id, tableName, entryId) {
-  try {
-    const requestOptions = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      }
-    };
-    const url = `${server}/api/${id}/${tableName}/${entryId}`;
-    const response = await req(url, requestOptions);
-    return response;
-  } catch(error) {
-    return null;
-  }
+async function getTable(id, tableName) {
+  return await get(`/api/${id}/${tableName}`);
 }
 
-async function GetField(id, tableName, entryId, field) {
-  try {
-    const requestOptions = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      }
-    };
-    const url = `${server}/api/${id}/${tableName}/${entryId}/${field}`;
-    const response = await req(url, requestOptions);
-    return response;
-  } catch(error) {
-    return null;
-  }
+async function getEntry(id, tableName, entryId) {
+  return await get(`/api/${id}/${tableName}/${entryId}`);
 }
 
-
-async function CreateBsonDB() {
-  try {
-    let data = await createDatabase();
-    return data.id;
-  } catch(error) {
-    console.error('An error occurred:', error);
-    return null;
-  }
+async function getField(id, tableName, entryId, field) {
+  return await get(`/api/${id}/${tableName}/${entryId}/${field}`);
 }
 
-async function CreateBsonTable(id, tableName, requiredFields) {
-  try {
-    const table = {
-      name: tableName,
-      requires: requiredFields,
-      entries: []
-    };
-    const response = await createTable(id, table);
-    return response;
-  } catch(error) {
-    console.error('An error occurred:', error);
-    return null;
-  }
-}
-
-async function AddBsonEntry(id, tableName, entryId, entry) {
-  try {
-    let fields = [];
-    for (const key in entry) {
-      fields.push({key: key, value: entry[key]});
-    }
-    let entryData = { 
-      id: entryId,
-      fields: fields
-    }
-    const response = await addEntry(id, tableName, entryData);
-    return response;
-  } catch(error) {
-    console.error('An error occurred:', error);
-    return null;
-  }
-}
-
-async function UpdateBsonField(id, tableName, entryId, field) {
-  try {
-    let entryField = {key: Object.keys(field)[0], value: Object.values(field)[0]};
-    const response = await updateFieldInTable(id, tableName, entryId, entryField);
-    return response;
-  } catch(error) {
-    console.error('An error occurred:', error);
-    return null;
-  }
-}
-
-async function UpdateBsonEntry(id, tableName, entryId, entry) {
-  try {
-
-    let fields = [];
-    for (const key in entry) {
-      fields.push({key: key, value: entry[key]});
-    }
-
-    let entryData = {
-      id: entryId,
-      fields: fields
-    }
-
-    const response = await updateEntryInTable(id, tableName, entryId, entryData);
-    return response;
-  } catch(error) {
-    console.error('An error occurred:', error);
-    return null;
-  }
-}
-
-async function DeleteBsonTable(id, tableName) {
-  try {
-    console.log(id, tableName);
-    const response = await deleteTable(id, tableName);
-    return response;
-  } catch(error) {
-    console.error('An error occurred:', error);
-    return null;
-  }
-}
-
-async function DeleteBsonDatabase(id) {
-  try {
-    const response = await deleteDatabase(id);
-    return response;
-  } catch(error) {
-    console.error('An error occurred:', error);
-    return null;
-  }
-}
-
-const bson = {
-  CreateBsonDB,
-  CreateBsonTable,
-  AddBsonEntry,
-  UpdateBsonField,
-  UpdateBsonEntry,
-  GetDatabase,
-  GetTable,
-  GetEntry,
-  GetField,
-  DeleteBsonTable,
-  DeleteBsonDatabase
-}
-
-module.exports = bson;
+module.exports = {
+  createDatabase,
+  createTable,
+  updateField,
+  updateEntry,
+  deleteDatabase,
+  addEntry,
+  deleteTable,
+  getDatabase,
+  getTable,
+  getEntry,
+  getField,
+};

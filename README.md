@@ -28,7 +28,7 @@ BsonDB-api is a non-relational database written in golang
  * @param {string} id - The unique identifier of the database.
  * @returns {Promise<Object|null>} A promise that resolves to the database object or null if an error occurs.
  */
-function GetDatabase(id) { /* ... */ }
+function getDatabase(id) { /* ... */ }
 
 /**
  * Retrieves a specific table within a database.
@@ -38,7 +38,7 @@ function GetDatabase(id) { /* ... */ }
  * @param {string} tableName - The name of the table to retrieve.
  * @returns {Promise<Object|null>} A promise that resolves to the table object or null if an error occurs.
  */
-function GetTable(id, tableName) { /* ... */ }
+function getTable(id, tableName) { /* ... */ }
 
 /**
  * Fetches a particular entry from a table within a database.
@@ -49,7 +49,7 @@ function GetTable(id, tableName) { /* ... */ }
  * @param {string} entryId - The unique identifier of the entry within the table.
  * @returns {Promise<Object|null>} A promise that resolves to the entry object or null if an error occurs.
  */
-function GetEntry(id, tableName, entryId) { /* ... */ }
+function getEntry(id, tableName, entryId) { /* ... */ }
 
 /**
  * Obtains a specific field value from an entry within a table in a database.
@@ -61,7 +61,7 @@ function GetEntry(id, tableName, entryId) { /* ... */ }
  * @param {string} field - The name of the field to retrieve.
  * @returns {Promise<Object|null>} A promise that resolves to the field value or null if an error occurs.
  */
-function GetField(id, tableName, entryId, field) { /* ... */ }
+function getField(id, tableName, entryId, field) { /* ... */ }
 
 /**
  * Creates a new BSON database and returns its ID.
@@ -69,7 +69,7 @@ function GetField(id, tableName, entryId, field) { /* ... */ }
  * @function
  * @returns {Promise<string|null>} A promise that resolves to the newly created database ID or null if an error occurs.
  */
-function CreateBsonDB() { /* ... */ }
+function createBsonDB() { /* ... */ }
 
 /**
  * Creates a new table within a database with specified required fields.
@@ -80,7 +80,7 @@ function CreateBsonDB() { /* ... */ }
  * @param {Array<string>} requiredFields - An array of strings specifying the required fields for the table.
  * @returns {Promise<Object|null>} A promise that resolves to the table creation result or null if an error occurs.
  */
-function CreateBsonTable(id, tableName, requiredFields) { /* ... */ }
+function createBsonTable(id, tableName, requiredFields) { /* ... */ }
 
 /**
  * Adds a new entry to a table within a database.
@@ -92,7 +92,7 @@ function CreateBsonTable(id, tableName, requiredFields) { /* ... */ }
  * @param {Object} entry - An object representing the entry with key-value pairs.
  * @returns {Promise<Object|null>} A promise that resolves to the entry addition result or null if an error occurs.
  */
-function AddBsonEntry(id, tableName, entryId, entry) { /* ... */ }
+function addEntry(id, tableName, entryId, entry) { /* ... */ }
 
 /**
  * Updates a specific field in an entry within a table in a database.
@@ -104,7 +104,7 @@ function AddBsonEntry(id, tableName, entryId, entry) { /* ... */ }
  * @param {Object} field - An object with one property representing the updated field and its value.
  * @returns {Promise<Object|null>} A promise that resolves to the field update result or null if an error occurs.
  */
-function UpdateBsonField(id, tableName, entryId, field) { /* ... */ }
+function updateField(id, tableName, entryId, field) { /* ... */ }
 
 /**
  * Updates an entire entry within a table in a database.
@@ -116,7 +116,7 @@ function UpdateBsonField(id, tableName, entryId, field) { /* ... */ }
  * @param {Object} entry - An object representing the updated entry with key-value pairs.
  * @returns {Promise<Object|null>} A promise that resolves to the entry update result or null if an error occurs.
  */
-function UpdateBsonEntry(id, tableName, entryId, entry) { /* ... */ }
+function updateEntry(id, tableName, entryId, entry) { /* ... */ }
 
 /**
  * Deletes a table from a database.
@@ -126,7 +126,7 @@ function UpdateBsonEntry(id, tableName, entryId, entry) { /* ... */ }
  * @param {string} tableName - The name of the table to delete.
  * @returns {Promise<Object|null>} A promise that resolves to the table deletion result or null if an error occurs.
  */
-function DeleteBsonTable(id, tableName) { /* ... */ }
+function deleteTable(id, tableName) { /* ... */ }
 
 /**
  * Deletes a database.
@@ -135,5 +135,5 @@ function DeleteBsonTable(id, tableName) { /* ... */ }
  * @param {string} id - The unique identifier of the database.
  * @returns {Promise<Object|null>} A promise that resolves to the database deletion result or null if an error occurs.
  */
-function DeleteBsonDatabase(id) { /* ... */ }
+function deleteDatabase(id) { /* ... */ }
 ```
