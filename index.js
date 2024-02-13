@@ -1,5 +1,5 @@
 const fetch = require('node-fetch');
-const server = "https://bsondb.up.railway.app";
+let server = "https://bsondb.up.railway.app";
 const defaultHeaders = {'Content-Type': 'application/json'};
 
 const apiRequest = async (method, path, body = null) => {
@@ -13,7 +13,7 @@ const apiRequest = async (method, path, body = null) => {
     const response = await fetch(url, requestOptions);
     return await response.json();
   } catch (error) {
-    throw error;
+    return null;
   }
 };
 
@@ -22,39 +22,34 @@ async function createDatabase() {
 }
 
 async function createTable(id, tableName, fields) {
-  let table = { name: tableName, requires: fields, entries: [] };
+  let table = { name: tableName, requires: fields, entries: {} };
   return await apiRequest('POST', `/api/add-table/${id}`, table);
 }
 
-async function updateField(id, table, entryId, field) {
-  let entryField = {key: Object.keys(field)[0], value: Object.values(field)[0]};
-  return await apiRequest('PUT', `/api/update-field/${id}/${table}/${entryId}`, entryField);
+async function updateField(id, table, entryId, object) {
+  return await apiRequest('PUT', `/api/update-field/${id}/${table}/${entryId}`, object);
 }
 
 async function updateEntry(id, table, entryId, entry) {
-  let fields = [];
-  for (const key in entry) {
-    fields.push({key: key, value: entry[key]});
-  }
-  let entryData = {id: entryId, fields: fields};
-  return await apiRequest('PUT', `/api/update-entry/${id}/${table}/${entryId}`, entryData);
+  return await apiRequest('PUT', `/api/update-entry/${id}/${table}/${entryId}`, entry);
 }
 
 async function deleteDatabase(id) {
   return await apiRequest('DELETE', `/api/deletedb/${id}`);
 }
 
-async function addEntry(id, tableName, entryId, entry) {
-  let fields = [];
-  for (const key in entry) {
-    fields.push({key: key, value: entry[key]});
-  }
-  return await apiRequest('POST', `/api/add-entry/${id}/${tableName}`, {id: entryId, fields: fields});
-}
-
 async function deleteTable(id, table) {
   return await apiRequest('DELETE', `/api/delete-table/${id}/${table}`);
 }
+
+async function deleteEntry(id, table, entryId) {
+  return await apiRequest('DELETE', `/api/delete-entry/${id}/${table}/${entryId}`);
+}
+
+async function createEntry(id, tableName, entryId, entry) {
+  return await apiRequest('POST', `/api/add-entry/${id}/${tableName}/${entryId}`, entry);
+}
+
 
 async function get(path) {
   return await apiRequest('GET', path);
@@ -82,10 +77,11 @@ module.exports = {
   updateField,
   updateEntry,
   deleteDatabase,
-  addEntry,
+  createEntry,
   deleteTable,
   getDatabase,
   getTable,
   getEntry,
   getField,
+  deleteEntry
 };

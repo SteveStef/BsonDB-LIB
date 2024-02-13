@@ -69,7 +69,7 @@ function getField(id, tableName, entryId, field) { /* ... */ }
  * @function
  * @returns {Promise<string|null>} A promise that resolves to the newly created database ID or null if an error occurs.
  */
-function createBsonDB() { /* ... */ }
+function createDatabase() { /* ... */ }
 
 /**
  * Creates a new table within a database with specified required fields.
@@ -80,7 +80,7 @@ function createBsonDB() { /* ... */ }
  * @param {Array<string>} requiredFields - An array of strings specifying the required fields for the table.
  * @returns {Promise<Object|null>} A promise that resolves to the table creation result or null if an error occurs.
  */
-function createBsonTable(id, tableName, requiredFields) { /* ... */ }
+function createTable(id, tableName, requiredFields) { /* ... */ }
 
 /**
  * Adds a new entry to a table within a database.
@@ -92,7 +92,7 @@ function createBsonTable(id, tableName, requiredFields) { /* ... */ }
  * @param {Object} entry - An object representing the entry with key-value pairs.
  * @returns {Promise<Object|null>} A promise that resolves to the entry addition result or null if an error occurs.
  */
-function addEntry(id, tableName, entryId, entry) { /* ... */ }
+function createEntry(id, tableName, entryId, entry) { /* ... */ }
 
 /**
  * Updates a specific field in an entry within a table in a database.
@@ -136,4 +136,15 @@ function deleteTable(id, tableName) { /* ... */ }
  * @returns {Promise<Object|null>} A promise that resolves to the database deletion result or null if an error occurs.
  */
 function deleteDatabase(id) { /* ... */ }
+
+/**
+ * Deletes an entire entry within a table in a database.
+ * @async
+ * @function
+ * @param {string} id - The unique identifier of the database.
+ * @param {string} tableName - The name of the table containing the entry.
+ * @param {string} entryId - The unique identifier of the entry within the table.
+ * @returns {Promise<Object|null>} A promise that resolves to the entry update result or null if an error occurs.
+ */
+function deleteEntry(id, tableName, entryId) { /* ... */ }
 ```
