@@ -64,14 +64,6 @@ function getEntry(id, tableName, entryId) { /* ... */ }
 function getField(id, tableName, entryId, field) { /* ... */ }
 
 /**
- * Creates a new BSON database and returns its ID.
- * @async
- * @function
- * @returns {Promise<string|null>} A promise that resolves to the newly created database ID or null if an error occurs.
- */
-function createDatabase() { /* ... */ }
-
-/**
  * Creates a new table within a database with specified required fields.
  * @async
  * @function
@@ -127,15 +119,6 @@ function updateEntry(id, tableName, entryId, entry) { /* ... */ }
  * @returns {Promise<Object|null>} A promise that resolves to the table deletion result or null if an error occurs.
  */
 function deleteTable(id, tableName) { /* ... */ }
-
-/**
- * Deletes a database.
- * @async
- * @function
- * @param {string} id - The unique identifier of the database.
- * @returns {Promise<Object|null>} A promise that resolves to the database deletion result or null if an error occurs.
- */
-function deleteDatabase(id) { /* ... */ }
 
 /**
  * Deletes an entire entry within a table in a database.

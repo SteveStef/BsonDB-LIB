@@ -18,7 +18,7 @@ const apiRequest = async (method, path, body = null) => {
 };
 
 async function createDatabase() {
-  return await apiRequest('POST', '/api/createdb', { tables: [] });
+  return await apiRequest('POST', '/api/createdb');
 }
 
 async function createTable(id, tableName, fields) {
