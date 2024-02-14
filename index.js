@@ -17,9 +17,9 @@ const apiRequest = async (method, path, body = null) => {
   }
 };
 
-async function createDatabase(auth) {
+async function createDatabase(auth, email) {
   defaultHeaders['Authorization'] = auth;
-  let result = await apiRequest('POST', '/api/createdb');
+  let result = await apiRequest('POST', '/api/createdb', {email});
   defaultHeaders['Authorization'] = null;
   return result;
 }
@@ -37,9 +37,9 @@ async function updateEntry(id, table, entryId, entry) {
   return await apiRequest('PUT', `/api/update-entry/${id}/${table}/${entryId}`, entry);
 }
 
-async function deleteDatabase(id, auth) {
+async function deleteDatabase(id, auth, email) {
   defaultHeaders['Authorization'] = auth;
-  let result = await apiRequest('DELETE', `/api/deletedb/${id}`);
+  let result = await apiRequest('POST', `/api/deletedb/${id}`, {email});
   defaultHeaders['Authorization'] = null;
   return result;
 }
