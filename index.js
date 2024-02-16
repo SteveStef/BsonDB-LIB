@@ -81,8 +81,11 @@ async function getEnties(id, tableName, field, value) {
   return await get(`/api/field/${id}/${tableName}/${field}/${value}`);
 }
 
-async function checkAccount(email, code) {
-  return await apiRequest('POST', `/api/check-account`, { email, code });
+async function checkAccount(email, code, auth) {
+  defaultHeaders['Authorization'] = auth;
+  let response = await apiRequest('POST', `/api/check-account`, { email, code });
+  defaultHeaders['Authorization'] = null;
+  return response;
 }
 
 
