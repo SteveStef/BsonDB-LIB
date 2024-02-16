@@ -62,32 +62,47 @@ async function get(path) {
 }
 
 async function getDatabase(id) {
-  return await get(`/api/readdb/${id}`);
+  return await get(`/api/database/${id}`);
 }
 
 async function getTable(id, tableName) {
-  return await get(`/api/${id}/${tableName}`);
+  return await get(`/api/table/${id}/${tableName}`);
 }
 
 async function getEntry(id, tableName, entryId) {
-  return await get(`/api/${id}/${tableName}/${entryId}`);
+  return await get(`/api/entry/${id}/${tableName}/${entryId}`);
 }
 
 async function getField(id, tableName, entryId, field) {
-  return await get(`/api/${id}/${tableName}/${entryId}/${field}`);
+  return await get(`/api/field/${id}/${tableName}/${entryId}/${field}`);
 }
+
+async function getEnties(id, tableName, field, value) {
+  return await get(`/api/field/${id}/${tableName}/${field}/${value}`);
+}
+
+async function checkAccount(email, code) {
+  return await apiRequest('POST', `/api/check-account`, { email, code });
+}
+
 
 module.exports = {
   createDatabase,
   createTable,
+  createEntry,
+
   updateField,
   updateEntry,
-  deleteDatabase,
-  createEntry,
+
   deleteTable,
+  deleteDatabase,
+  deleteEntry,
+
   getDatabase,
   getTable,
   getEntry,
   getField,
-  deleteEntry
+  getEnties,
+
+  checkAccount
 };
