@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 
 const fs = require('fs');
 const path = require('path');
@@ -5,7 +6,7 @@ const path = require('path');
 const dir = path.dirname(__filename);
 
 const prodPath = path.join(dir, '../../tables.json');
-const devPath = path.join(dir, 'tables.json');
+// const devPath = path.join(dir, 'tables.json');
 
 const { createTable } = require('./index.js');
 

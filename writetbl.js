@@ -3,7 +3,7 @@ const path = require('path');
 
 const dir = path.dirname(__filename);
 const prodPath = path.join(dir, '../../tables.json');
-const devPath = path.join(dir, 'tables.json');
+// const devPath = path.join(dir, 'tables.json');
 
 (() => {
   try {

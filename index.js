@@ -24,7 +24,7 @@ async function createDatabase(auth, email) {
   return result;
 }
 
-async function createTable(id, tableName, fields) {
+async function createTable(id, tableName, fields=[]) {
   let table = { name: tableName, requires: fields, entries: {} };
   return await apiRequest('POST', `/api/add-table/${id}`, table);
 }
