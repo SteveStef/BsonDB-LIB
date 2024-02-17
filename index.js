@@ -88,7 +88,6 @@ async function checkAccount(email, code, auth) {
   return response;
 }
 
-
 module.exports = {
   createDatabase,
   createTable,
