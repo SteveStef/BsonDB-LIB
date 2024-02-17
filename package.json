@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "node ./table.js"
+    "postinstall": "node ./writetlb.js"
   },
   "bin": {
-    "bsondb tbl pub": "./table.js"
+    "bsondb tbl pub": "./readtbl.js"
   },
   "author": "Stephen Stefanatos",
   "license": "ISC",
