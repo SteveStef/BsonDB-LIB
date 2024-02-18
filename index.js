@@ -24,9 +24,8 @@ async function createDatabase(auth, email) {
   return result;
 }
 
-async function createTable(id, tableName, fields=[]) {
-  let table = { name: tableName, requires: fields, entries: {} };
-  return await apiRequest('POST', `/api/add-table/${id}`, table);
+async function createTable(id, tables) {
+  return await apiRequest('POST', `/api/migrate-tables/${id}`, tables);
 }
 
 async function updateField(id, table, entryId, object) {
@@ -77,8 +76,8 @@ async function getField(id, tableName, entryId, field) {
   return await get(`/api/field/${id}/${tableName}/${entryId}/${field}`);
 }
 
-async function getEnties(id, tableName, field, value) {
-  return await get(`/api/field/${id}/${tableName}/${field}/${value}`);
+async function getEntries(id, tableName, field, value) {
+  return await get(`/api/entries/${id}/${tableName}/${field}/${value}`);
 }
 
 async function checkAccount(email, code, auth) {
@@ -104,7 +103,7 @@ module.exports = {
   getTable,
   getEntry,
   getField,
-  getEnties,
+  getEntries,
 
   checkAccount
 };

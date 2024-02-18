@@ -14,11 +14,14 @@ const { createTable } = require('./index.js');
   try {
     const data = fs.readFileSync(prodPath, 'utf8');
     const { databaseID, tables } = JSON.parse(data);
-    for (let i = 0; i < tables.length; i++) {
-      const { name, requiredFields } = tables[i];
-      await createTable(databaseID, name, requiredFields);
+    for(let i = 0; i < tables.length; i++) { tables[i].entries = {}; }
+    const response = await createTable(databaseID, tables);
+    if(response.error) {
+      console.log("Error creating tables:");
+      console.log(response);
+      return;
     }
-    console.log("Tables created successfully");
+    console.log(response.message);
   } catch(err) {
     console.log("Error reading tables.json:");
     console.log(err);
