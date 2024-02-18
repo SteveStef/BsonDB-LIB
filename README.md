@@ -64,17 +64,6 @@ function getEntry(id, tableName, entryId) { /* ... */ }
 function getField(id, tableName, entryId, field) { /* ... */ }
 
 /**
- * Creates a new table within a database with specified required fields.
- * @async
- * @function
- * @param {string} id - The unique identifier of the database.
- * @param {string} tableName - The name of the table to create.
- * @param {Array<string>} requiredFields - An array of strings specifying the required fields for the table.
- * @returns {Promise<Object|null>} A promise that resolves to the table creation result or null if an error occurs.
- */
-function createTable(id, tableName, requiredFields) { /* ... */ }
-
-/**
  * Adds a new entry to a table within a database.
  * @async
  * @function
