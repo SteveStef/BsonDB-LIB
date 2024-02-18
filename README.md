@@ -1,4 +1,4 @@
-# Version 1.2.2
+# Version 1.2.3
 
 # Introduction
 
@@ -36,11 +36,11 @@ types that are not primitive.
 
 ```js
 
-// ===============Example===================
+// =======================Example========================
 const BsonDB = require("bsondb-api");
 const db = new BsonDB(process.env.DATABASE_ID);
-db.getDatabase().then(db => console.log(db));
-// =========================================
+db.getDatabase().then(response => console.log(response));
+// ======================================================
 
 /**
  * Fetches the database with the given ID.
