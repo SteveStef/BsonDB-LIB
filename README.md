@@ -1,8 +1,8 @@
-# Version 1.2.3
+# Version 1.2.4
 
 # Introduction
 
-BSON Database API Documentation
+Bson Database API Documentation.
 This README provides an overview of the BSON Database library, 
 including the available functions and their usage. 
 

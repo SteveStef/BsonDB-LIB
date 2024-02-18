@@ -21,6 +21,7 @@ const BsonDB = require('./index.js');
       for(let key in tables[i].entryTemplate) {
         if(!validTypes.includes(tables[i].entryTemplate[key])) {
           console.log(`Invalid type for ${key} in ${tables[i].name}`);
+          console.log("Valid types are: string, number, boolean, object");
           return;
         }
       }
@@ -31,7 +32,10 @@ const BsonDB = require('./index.js');
       console.log(response.error);
       return;
     }
-    console.log(response.message);
+
+    console.log("Tables created successfully");
+    console.log("Go to https://bsondb.com/api/database/" + databaseID + " to view your database.");
+
   } catch(err) {
     console.log("Error reading tables.json:");
     console.log(err);
