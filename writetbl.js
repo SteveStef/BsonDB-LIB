@@ -17,9 +17,9 @@ const prodPath = path.join(dir, '../../tables.json');
     ];
     const content = { databaseID: "Put your database id here", tables: basicTable };
     fs.writeFileSync(prodPath, JSON.stringify(content, null,  2));
-    console.log("tables.json created successfully");
+    console.info("Tables.json created successfully");
   } catch(err) {
-    console.log(err);
+    console.error(err);
   }
 })();
 

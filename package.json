@@ -1,7 +1,7 @@
 {
   "name": "bsondb-api",
-  "version": "1.2.4",
-  "description": "A simple database using BSON and Node.js",
+  "version": "1.2.5",
+  "description": "A simple database using Bson and Node.js",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

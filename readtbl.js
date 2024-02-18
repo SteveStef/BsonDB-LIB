@@ -20,25 +20,25 @@ const BsonDB = require('./index.js');
       tables[i].entries = {}; 
       for(let key in tables[i].entryTemplate) {
         if(!validTypes.includes(tables[i].entryTemplate[key])) {
-          console.log(`Invalid type for ${key} in ${tables[i].name}`);
-          console.log("Valid types are: string, number, boolean, object");
+          console.error(`Invalid type for ${key} in ${tables[i].name}`);
+          console.error("Valid types are: string, number, boolean, object");
           return;
         }
       }
     }
     const response = await db.createTable(tables);
     if(response.error) {
-      console.log("Error creating tables:");
-      console.log(response.error);
+      console.error("Error creating tables:");
+      console.error(response.error);
       return;
     }
 
-    console.log("Tables created successfully");
-    console.log("Go to https://bsondb.com/api/database/" + databaseID + " to view your database.");
+    console.info("Tables created successfully");
+    console.info("Go to https://bsondb.up.railway.app/api/database/" + databaseID + " to view your database.");
 
   } catch(err) {
-    console.log("Error reading tables.json:");
-    console.log(err);
+    console.error("Error reading tables.json:");
+    console.error(err);
   }
 })();
 
