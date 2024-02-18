@@ -18,7 +18,7 @@ const { createTable } = require('./index.js');
     const response = await createTable(databaseID, tables);
     if(response.error) {
       console.log("Error creating tables:");
-      console.log(response);
+      console.log(response.error);
       return;
     }
     console.log(response.message);

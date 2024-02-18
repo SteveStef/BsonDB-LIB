@@ -9,10 +9,10 @@ const prodPath = path.join(dir, '../../tables.json');
   try {
     const basicTable = [
       {
-        name: "Example Table  1",
+        name: "Example_Table",
         identifier: "email",
         requires: ["email", "password"],
-        entryTemplate: { email: "", password: "", age: 0},
+        entryTemplate: {email: "string", password: "string", age: "number", friendsList: "object"},
       },
     ];
     const content = { databaseID: "Put your database id here", tables: basicTable };
