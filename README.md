@@ -1,4 +1,4 @@
-# Version 1.2.0
+# Version 1.2.1
 
 # Introduction
 
@@ -35,106 +35,104 @@ types that are not primitive.
 # All Functions
 
 ```js
+
+// ===============Example===================
+const BsonDB = require("bsondb-api");
+const db = new BsonDB(process.env.DATABASE_ID);
+db.getDatabase().then(db => console.log(db));
+// =========================================
+
 /**
  * Fetches the database with the given ID.
  * @async
  * @function
- * @param {string} id - The unique identifier of the database.
  * @returns {Promise<Object>} A promise that resolves to the database object or An error object on fail.
  */
-function getDatabase(id) { /* ... */ }
+function getDatabase() { /* ... */ }
 
 /**
  * Retrieves a specific table within a database.
  * @async
  * @function
- * @param {string} id - The unique identifier of the database.
  * @param {string} tableName - The name of the table to retrieve.
  * @returns {Promise<Object>} A promise that resolves to the table object or An error object on fail.
  */
-function getTable(id, tableName) { /* ... */ }
+function getTable(tableName) { /* ... */ }
 
 /**
  * Fetches a particular entry from a table within a database.
  * @async
  * @function
- * @param {string} id - The unique identifier of the database.
  * @param {string} tableName - The name of the table containing the entry.
  * @param {string} entryId - The unique identifier of the entry within the table.
  * @returns {Promise<Object|null>} A promise that resolves to the entry object or an error object.
  */
-function getEntry(id, tableName, entryId) { /* ... */ }
+function getEntry(tableName, entryId) { /* ... */ }
 
 /**
  * Obtains a specific field value from an entry within a table in a database.
  * @async
  * @function
- * @param {string} id - The unique identifier of the database.
  * @param {string} tableName - The name of the table containing the entry.
  * @param {string} entryId - The unique identifier of the entry within the table.
  * @param {string} field - The name of the field to retrieve.
  * @returns {Promise<Object>} A promise that resolves to the field value or an error object.
  */
-function getField(id, tableName, entryId, field) { /* ... */ }
+function getField(tableName, entryId, field) { /* ... */ }
 
 /**
  * Adds a new entry to a table within a database.
  * @async
  * @function
- * @param {string} id - The unique identifier of the database.
  * @param {string} tableName - The name of the table to add the entry to.
  * @param {string} entryId - The unique identifier for the new entry.
  * @param {Object} entry - An object representing the entry with key-value pairs.
  * @returns {Promise<Object>} A promise that resolves to the entry addition result or an error object.
  */
-function createEntry(id, tableName, entryId, entry) { /* ... */ }
+function createEntry(tableName, entryId, entry) { /* ... */ }
 
 /**
  * Updates a specific field in an entry within a table in a database.
  * @async
  * @function
- * @param {string} id - The unique identifier of the database.
  * @param {string} tableName - The name of the table containing the entry.
  * @param {string} entryId - The unique identifier of the entry within the table.
  * @param {Object} field - An object with one property representing the updated field and its value.
  * @returns {Promise<Object>} A promise that resolves to the field update result or an error object.
  */
-function updateField(id, tableName, entryId, field) { /* ... */ }
+function updateField(tableName, entryId, field) { /* ... */ }
 
 /**
  * Updates an entire entry within a table in a database.
  * @async
  * @function
- * @param {string} id - The unique identifier of the database.
  * @param {string} tableName - The name of the table containing the entry.
  * @param {string} entryId - The unique identifier of the entry within the table.
  * @param {Object} entry - An object representing the updated entry with key-value pairs.
  * @returns {Promise<Object>} A promise that resolves to the entry update result or an error object.
  */
-function updateEntry(id, tableName, entryId, entry) { /* ... */ }
+function updateEntry(tableName, entryId, entry) { /* ... */ }
 
 /**
  * Deletes an entire entry within a table in a database.
  * @async
  * @function
- * @param {string} id - The unique identifier of the database.
  * @param {string} tableName - The name of the table containing the entry.
  * @param {string} entryId - The unique identifier of the entry within the table.
  * @returns {Promise<Object>} A promise that resolves to the entry update result or an erro object.
  */
-function deleteEntry(id, tableName, entryId) { /* ... */ }
+function deleteEntry(tableName, entryId) { /* ... */ }
 
 /**
  * Deletes an entire entry within a table in a database.
  * @async
  * @function
- * @param {string} id - The unique identifier of the database.
  * @param {string} tableName - The name of the table containing the entry.
  * @param {string} field - the key of the proptery you're searching for
  * @param {string} value - the value of the proptery you're searching for
  * @returns {Promise<Object>} A promise that returns a list of all occurances of the key value pair in that table or an error obect.
  */
-function getEntries(id, tableName, field, value) { /* ... */ }
+function getEntries(tableName, field, value) { /* ... */ }
 ```
 
 # More info

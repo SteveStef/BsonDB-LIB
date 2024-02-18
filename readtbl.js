@@ -8,14 +8,24 @@ const dir = path.dirname(__filename);
 const prodPath = path.join(dir, '../../tables.json');
 // const devPath = path.join(dir, 'tables.json');
 
-const { createTable } = require('./index.js');
+const BsonDB = require('./index.js');
 
 (async () => {
   try {
     const data = fs.readFileSync(prodPath, 'utf8');
     const { databaseID, tables } = JSON.parse(data);
-    for(let i = 0; i < tables.length; i++) { tables[i].entries = {}; }
-    const response = await createTable(databaseID, tables);
+    const db = new BsonDB(databaseID);
+    const validTypes = ['string', 'number', 'boolean', 'object'];
+    for(let i = 0; i < tables.length; i++) { 
+      tables[i].entries = {}; 
+      for(let key in tables[i].entryTemplate) {
+        if(!validTypes.includes(tables[i].entryTemplate[key])) {
+          console.log(`Invalid type for ${key} in ${tables[i].name}`);
+          return;
+        }
+      }
+    }
+    const response = await db.createTable(tables);
     if(response.error) {
       console.log("Error creating tables:");
       console.log(response.error);
