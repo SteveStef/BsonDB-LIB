@@ -1,18 +1,32 @@
+# Version 1.2.0
 
 # Introduction
 
 BSON Database API Documentation
 This README provides an overview of the BSON Database library, 
 including the available functions and their usage. 
-The API is designed to interact with a remote server hosting BSON 
-databases, providing CRUD operations for databases, tables, and entries.
 
-This is an library to make using my bson api easy 
-BsonDB-api is a non-relational database written in golang 
+In order to get a key please visit bsondb.netlify.app
+Here you are able to create/delete your database.
 
-# Installation
+**Do NOT store any sensitive data in BsonDB for the time being
+as this database is still in beta.
+
+# Installation / Setup
 
 `npm install bsondb-api`
+
+After installation you will notice that it generates a tables.json
+file in your root directoy. Here you may design the stuctures of your
+tables. After designing your tables, enter the command:
+
+`npx bsondb`
+
+This commands will migrate your current table structures into your database.
+Please note that when you are defining your types, the only available types
+are `string`, `number`, `boolean`, `object`. Use the `object` type for all
+types that are not primitive.
+
 
 # Usage
 
@@ -22,11 +36,11 @@ BsonDB-api is a non-relational database written in golang
 
 ```js
 /**
- * Fetches the database with the given ID from the remote server.
+ * Fetches the database with the given ID.
  * @async
  * @function
  * @param {string} id - The unique identifier of the database.
- * @returns {Promise<Object|null>} A promise that resolves to the database object or null if an error occurs.
+ * @returns {Promise<Object>} A promise that resolves to the database object or An error object on fail.
  */
 function getDatabase(id) { /* ... */ }
 
@@ -36,7 +50,7 @@ function getDatabase(id) { /* ... */ }
  * @function
  * @param {string} id - The unique identifier of the database.
  * @param {string} tableName - The name of the table to retrieve.
- * @returns {Promise<Object|null>} A promise that resolves to the table object or null if an error occurs.
+ * @returns {Promise<Object>} A promise that resolves to the table object or An error object on fail.
  */
 function getTable(id, tableName) { /* ... */ }
 
@@ -47,7 +61,7 @@ function getTable(id, tableName) { /* ... */ }
  * @param {string} id - The unique identifier of the database.
  * @param {string} tableName - The name of the table containing the entry.
  * @param {string} entryId - The unique identifier of the entry within the table.
- * @returns {Promise<Object|null>} A promise that resolves to the entry object or null if an error occurs.
+ * @returns {Promise<Object|null>} A promise that resolves to the entry object or an error object.
  */
 function getEntry(id, tableName, entryId) { /* ... */ }
 
@@ -59,7 +73,7 @@ function getEntry(id, tableName, entryId) { /* ... */ }
  * @param {string} tableName - The name of the table containing the entry.
  * @param {string} entryId - The unique identifier of the entry within the table.
  * @param {string} field - The name of the field to retrieve.
- * @returns {Promise<Object|null>} A promise that resolves to the field value or null if an error occurs.
+ * @returns {Promise<Object>} A promise that resolves to the field value or an error object.
  */
 function getField(id, tableName, entryId, field) { /* ... */ }
 
@@ -71,7 +85,7 @@ function getField(id, tableName, entryId, field) { /* ... */ }
  * @param {string} tableName - The name of the table to add the entry to.
  * @param {string} entryId - The unique identifier for the new entry.
  * @param {Object} entry - An object representing the entry with key-value pairs.
- * @returns {Promise<Object|null>} A promise that resolves to the entry addition result or null if an error occurs.
+ * @returns {Promise<Object>} A promise that resolves to the entry addition result or an error object.
  */
 function createEntry(id, tableName, entryId, entry) { /* ... */ }
 
@@ -83,7 +97,7 @@ function createEntry(id, tableName, entryId, entry) { /* ... */ }
  * @param {string} tableName - The name of the table containing the entry.
  * @param {string} entryId - The unique identifier of the entry within the table.
  * @param {Object} field - An object with one property representing the updated field and its value.
- * @returns {Promise<Object|null>} A promise that resolves to the field update result or null if an error occurs.
+ * @returns {Promise<Object>} A promise that resolves to the field update result or an error object.
  */
 function updateField(id, tableName, entryId, field) { /* ... */ }
 
@@ -95,19 +109,9 @@ function updateField(id, tableName, entryId, field) { /* ... */ }
  * @param {string} tableName - The name of the table containing the entry.
  * @param {string} entryId - The unique identifier of the entry within the table.
  * @param {Object} entry - An object representing the updated entry with key-value pairs.
- * @returns {Promise<Object|null>} A promise that resolves to the entry update result or null if an error occurs.
+ * @returns {Promise<Object>} A promise that resolves to the entry update result or an error object.
  */
 function updateEntry(id, tableName, entryId, entry) { /* ... */ }
-
-/**
- * Deletes a table from a database.
- * @async
- * @function
- * @param {string} id - The unique identifier of the database.
- * @param {string} tableName - The name of the table to delete.
- * @returns {Promise<Object|null>} A promise that resolves to the table deletion result or null if an error occurs.
- */
-function deleteTable(id, tableName) { /* ... */ }
 
 /**
  * Deletes an entire entry within a table in a database.
@@ -116,7 +120,33 @@ function deleteTable(id, tableName) { /* ... */ }
  * @param {string} id - The unique identifier of the database.
  * @param {string} tableName - The name of the table containing the entry.
  * @param {string} entryId - The unique identifier of the entry within the table.
- * @returns {Promise<Object|null>} A promise that resolves to the entry update result or null if an error occurs.
+ * @returns {Promise<Object>} A promise that resolves to the entry update result or an erro object.
  */
 function deleteEntry(id, tableName, entryId) { /* ... */ }
+
+/**
+ * Deletes an entire entry within a table in a database.
+ * @async
+ * @function
+ * @param {string} id - The unique identifier of the database.
+ * @param {string} tableName - The name of the table containing the entry.
+ * @param {string} field - the key of the proptery you're searching for
+ * @param {string} value - the value of the proptery you're searching for
+ * @returns {Promise<Object>} A promise that returns a list of all occurances of the key value pair in that table or an error obect.
+ */
+function getEntries(id, tableName, field, value) { /* ... */ }
 ```
+
+# More info
+You are unable to post more than 1 MB of data to BsonDB in a single request due
+to memory limitaions
+
+If you are not recieving a verification code, try again tomorrow, the number of
+emails I can send per day is limited.
+
+Normal users are unable to create/delete their own database through this npm 
+library, please visit bsondb.netlify.app to create/delete a database.
+
+If you have any questions/suggestions or concerns about BsonDB please contact me
+through my email: stephenstef456@gmail.com
+
