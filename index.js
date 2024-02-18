@@ -18,7 +18,7 @@ async function apiRequest (method, path, body = null) {
 };
 
 async function get(path) {
-  return await this.apiRequest('GET', path);
+  return await apiRequest('GET', path);
 }
 
 class BsonDB {
