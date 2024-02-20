@@ -1,6 +1,6 @@
 {
   "name": "bsondb-api",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "description": "A simple database using Bson and Node.js",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
     "postinstall": "node ./writetbl.js"
   },
   "bin": {
-    "bsondb": "./readtbl.js"
+    "bsondb-migrate": "./readtbl.js"
   },
   "author": "Stephen Stefanatos",
   "license": "ISC",

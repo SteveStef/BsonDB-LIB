@@ -1,4 +1,4 @@
-# Version 1.2.5
+# Version 1.2.6
 
 # Introduction
 
@@ -92,23 +92,12 @@ function getField(tableName, entryId, field) { /* ... */ }
 function createEntry(tableName, entryId, entry) { /* ... */ }
 
 /**
- * Updates a specific field in an entry within a table in a database.
+ * Updates an entry within a table in a database.
  * @async
  * @function
  * @param {string} tableName - The name of the table containing the entry.
  * @param {string} entryId - The unique identifier of the entry within the table.
- * @param {Object} field - An object with one property representing the updated field and its value.
- * @returns {Promise<Object>} A promise that resolves to the field update result or an error object.
- */
-function updateField(tableName, entryId, field) { /* ... */ }
-
-/**
- * Updates an entire entry within a table in a database.
- * @async
- * @function
- * @param {string} tableName - The name of the table containing the entry.
- * @param {string} entryId - The unique identifier of the entry within the table.
- * @param {Object} entry - An object representing the updated entry with key-value pairs.
+ * @param {Object} entry - An object representing which values in the entry you would like to update.
  * @returns {Promise<Object>} A promise that resolves to the entry update result or an error object.
  */
 function updateEntry(tableName, entryId, entry) { /* ... */ }

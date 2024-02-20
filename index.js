@@ -26,6 +26,11 @@ class BsonDB {
     this.databaseId = databaseId;
   }
 
+
+  async updateEntry(table, entryId, object) {
+    return await apiRequest('PUT', `/api/update-field/${this.databaseId}/${table}/${entryId}`, object);
+  }
+
   /*async createDatabase(auth, email) {
     defaultHeaders['Authorization'] = auth;
     let result = await apiRequest('POST', '/api/createdb', {email});
@@ -33,23 +38,18 @@ class BsonDB {
     return result;
   }*/
 
-  async createTable(tables) {
-    return await apiRequest('POST', `/api/migrate-tables/${this.databaseId}`, tables);
-  }
-
-  async updateField(table, entryId, object) {
-    return await apiRequest('PUT', `/api/update-field/${this.databaseId}/${table}/${entryId}`, object);
-  }
-
-  async updateEntry(table, entryId, entry) {
-    return await apiRequest('PUT', `/api/update-entry/${this.datbase}/${table}/${entryId}`, entry);
-  }
-
   /*async deleteDatabase(auth, email) {
     defaultHeaders['Authorization'] = auth;
     let result = await apiRequest('POST', `/api/deletedb/${this.databaseId}`, {email});
     defaultHeaders['Authorization'] = null;
     return result;
+  }*/
+
+  /*async checkAccount(email, code, auth) {
+    defaultHeaders['Authorization'] = auth;
+    let response = await apiRequest('POST', `/api/check-account`, { email, code });
+    defaultHeaders['Authorization'] = null;
+    return response;
   }*/
 
   async deleteTable(table) {
@@ -63,8 +63,6 @@ class BsonDB {
   async createEntry(tableName, entryId, entry) {
     return await apiRequest('POST', `/api/add-entry/${this.databaseId}/${tableName}/${entryId}`, entry);
   }
-
-
 
   async getDatabase() {
     return await get(`/api/database/${this.databaseId}`);
@@ -85,13 +83,6 @@ class BsonDB {
   async getEntries(tableName, field, value) {
     return await get(`/api/entries/${this.databaseId}/${tableName}/${field}/${value}`);
   }
-
-  /*async checkAccount(email, code, auth) {
-    defaultHeaders['Authorization'] = auth;
-    let response = await apiRequest('POST', `/api/check-account`, { email, code });
-    defaultHeaders['Authorization'] = null;
-    return response;
-  }*/
 }
 
 module.exports = BsonDB;
