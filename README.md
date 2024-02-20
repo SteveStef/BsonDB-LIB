@@ -1,4 +1,4 @@
-# Version 1.2.7
+# Version 1.2.8
 
 # Introduction
 
@@ -117,11 +117,10 @@ function deleteEntry(tableName, entryId) { /* ... */ }
  * @async
  * @function
  * @param {string} tableName - The name of the table containing the entry.
- * @param {string} field - the key of the proptery you're searching for
- * @param {string} value - the value of the proptery you're searching for
+ * @param {string} propery - the key value pair of the proptery you're searching for ex. { email: "john@mail.com" }
  * @returns {Promise<Object>} A promise that returns a list of all occurances of the key value pair in that table or an error obect.
  */
-function getEntries(tableName, field, value) { /* ... */ }
+function getEntries(tableName, property) { /* ... */ }
 ```
 
 # More info

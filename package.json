@@ -1,6 +1,6 @@
 {
   "name": "bsondb-api",
-  "version": "1.2.7",
+  "version": "1.2.8",
   "description": "A simple database using Bson and Node.js",
   "main": "index.js",
   "scripts": {

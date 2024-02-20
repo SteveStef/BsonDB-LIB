@@ -81,8 +81,10 @@ class BsonDB {
     return await get(`/api/field/${this.databaseId}/${tableName}/${entryId}/${field}`);
   }
 
-  async getEntries(tableName, field, value) {
-    return await get(`/api/entries/${this.databaseId}/${tableName}/${field}/${value}`);
+  async getEntries(tableName, property) {
+    let key = Object.keys(property)[0];
+    let value = property[key];
+    return await get(`/api/entries/${this.databaseId}/${tableName}/${key}/${value}`);
   }
 }
 
