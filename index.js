@@ -52,9 +52,10 @@ class BsonDB {
     return response;
   }*/
 
+  /*
   async deleteTable(table) {
     return await apiRequest('DELETE', `/api/delete-table/${this.databaseId}/${table}`);
-  }
+  }*/
 
   async deleteEntry(table, entryId) {
     return await apiRequest('DELETE', `/api/delete-entry/${this.databaseId}/${table}/${entryId}`);
