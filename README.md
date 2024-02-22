@@ -1,4 +1,4 @@
-# Version 1.2.8
+# Version 1.2.9
 
 # Introduction
 
@@ -20,7 +20,7 @@ After installation you will notice that it generates a tables.json
 file in your root directoy. Here you may design the stuctures of your
 tables. After designing your tables, enter the command:
 
-`npx bsondb`
+`npx bsondb-migrate`
 
 This commands will migrate your current table structures into your database.
 Please note that when you are defining your types, the only available types
