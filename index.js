@@ -26,9 +26,12 @@ class BsonDB {
     this.databaseId = databaseId;
   }
 
-
-  async updateEntry(table, entryId, object) {
-    return await apiRequest('PUT', `/api/update-field/${this.databaseId}/${table}/${entryId}`, object);
+  async updateEntry(table, query) {
+    if(!query || !query.where || !query.data) {
+      console.error("Invalid query, use the form {where: string, data: object}");
+      return null;
+    }
+    return await apiRequest('PUT', `/api/update-field/${this.databaseId}/${table}/${query.where}`, query.data);
   }
 
   /*async createDatabase(auth, email) {
@@ -57,12 +60,16 @@ class BsonDB {
     return await apiRequest('DELETE', `/api/delete-table/${this.databaseId}/${table}`);
   }*/
 
-  async deleteEntry(table, entryId) {
-    return await apiRequest('DELETE', `/api/delete-entry/${this.databaseId}/${table}/${entryId}`);
+  async deleteEntry(table, query) {
+    if(!query || !query.where) {
+      console.error("Invalid query, use the form {where: 'value'}");
+      return null;
+    }
+    return await apiRequest('DELETE', `/api/delete-entry/${this.databaseId}/${table}/${query.where}`);
   }
 
-  async createEntry(tableName, entryId, entry) {
-    return await apiRequest('POST', `/api/add-entry/${this.databaseId}/${tableName}/${entryId}`, entry);
+  async createEntry(tableName, entry) {
+    return await apiRequest('POST', `/api/add-entry/${this.databaseId}/${tableName}`, entry);
   }
 
   async getDatabase() {
@@ -73,12 +80,20 @@ class BsonDB {
     return await get(`/api/table/${this.databaseId}/${tableName}`);
   }
 
-  async getEntry(tableName, entryId) {
-    return await get(`/api/entry/${this.databaseId}/${tableName}/${entryId}`);
+  async getEntry(tableName, query) {
+    if(!query || !query.where) {
+      console.error("Invalid query, use the form {where: 'value'}");
+      return null;
+    }
+    return await get(`/api/entry/${this.databaseId}/${tableName}/${query.where}`);
   }
 
-  async getField(tableName, entryId, field) {
-    return await get(`/api/field/${this.databaseId}/${tableName}/${entryId}/${field}`);
+  async getField(tableName, query) {
+    if(!query || !query.where || !query.find) {
+      console.error("Invalid query, use the form {where: 'value', find: 'value'}");
+      return null;
+    }
+    return await get(`/api/field/${this.databaseId}/${tableName}/${query.where}/${query.find}`);
   }
 
   async getEntries(tableName, property) {

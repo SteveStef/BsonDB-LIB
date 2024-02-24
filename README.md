@@ -1,4 +1,4 @@
-# Version 1.2.9
+# Version 1.3.0
 
 # Introduction
 
@@ -107,10 +107,10 @@ function updateEntry(tableName, entryId, entry) { /* ... */ }
  * @async
  * @function
  * @param {string} tableName - The name of the table containing the entry.
- * @param {string} entryId - The unique identifier of the entry within the table.
+ * @param {object} - query - an object in the form { where: 'value' }
  * @returns {Promise<Object>} A promise that resolves to the entry update result or an erro object.
  */
-function deleteEntry(tableName, entryId) { /* ... */ }
+function deleteEntry(tableName, query) { /* ... */ }
 
 /**
  * Deletes an entire entry within a table in a database.

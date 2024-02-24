@@ -51,7 +51,7 @@ async function createTable(databaseId, tables) {
     }
 
     console.info("Tables created successfully");
-    console.info("Go to https://bsondb.up.railway.app/api/database/" + databaseID + " to view your database.");
+    console.info("Go to https://bsondb.netlify.app/ to view your database.");
 
   } catch(err) {
     console.error("Error reading tables.json:");
