@@ -25,7 +25,8 @@ async function apiRequest (method, path, body = null) {
 };
 
 async function createTable(databaseId, tables) {
-  return await apiRequest('POST', `/api/migrate-tables/${databaseId}`, tables);
+  let body = { databaseId, tables };
+  return await apiRequest('POST', `/api/migrate-tables`, body);
 }
 
 (async () => {

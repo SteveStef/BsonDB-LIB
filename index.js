@@ -18,10 +18,6 @@ async function apiRequest (method, path, body = null) {
   }
 };
 
-async function get(path) {
-  return await apiRequest('GET', path);
-}
-
 class BsonDB {
   constructor(databaseId) {
     this.databaseId = databaseId;
@@ -29,10 +25,11 @@ class BsonDB {
 
   async updateEntry(table, query) {
     if(!query || !query.where || !query.set) {
-      console.error("Invalid query, use the form {where: string, data: object}");
+      console.error("Invalid query, use the form {where: string, set: object}");
       return null;
     }
-    return await apiRequest('PUT', `/api/update-field/${this.databaseId}/${table}/${query.where}`, query.set);
+    const body = { databaseId: this.databaseId, table, entryId: query.where, entry: query.set };
+    return await apiRequest('PUT', `/api/update-field`, body);
   }
 
   async deleteEntry(table, query) {
@@ -40,19 +37,23 @@ class BsonDB {
       console.error("Invalid query, use the form {where: 'value'}");
       return null;
     }
-    return await apiRequest('DELETE', `/api/delete-entry/${this.databaseId}/${table}/${query.where}`);
+    let body = { databaseId: this.databaseId, table, entryId: query.where };
+    return await apiRequest('POST', `/api/delete-entry`, body);
   }
 
   async createEntry(tableName, entry) {
-    return await apiRequest('POST', `/api/add-entry/${this.databaseId}/${tableName}`, entry);
+    let body = { databaseId: this.databaseId, table: tableName, entry };
+    return await apiRequest('POST', `/api/add-entry`, body);
   }
 
   async getDatabase() {
-    return await get(`/api/database/${this.databaseId}`);
+    let body = { databaseId: this.databaseId };
+    return await apiRequest("POST", `/api/database`, body);
   }
 
   async getTable(tableName) {
-    return await get(`/api/table/${this.databaseId}/${tableName}`);
+    let body = { databaseId: this.databaseId, table: tableName};
+    return await apiRequest("POST", `/api/table`, body);
   }
 
   async getEntry(tableName, query) {
@@ -60,7 +61,8 @@ class BsonDB {
       console.error("Invalid query, use the form {where: 'value'}");
       return null;
     }
-    return await get(`/api/entry/${this.databaseId}/${tableName}/${query.where}`);
+    let body = { databaseId: this.databaseId, table: tableName, entryId: query.where };
+    return await apiRequest("POST",`/api/entry`, body);
   }
 
   async getField(tableName, query) {
@@ -68,7 +70,8 @@ class BsonDB {
       console.error("Invalid query, use the form {where: 'value', find: 'value'}");
       return null;
     }
-    return await get(`/api/field/${this.databaseId}/${tableName}/${query.where}/${query.find}`);
+    let body = { databaseId: this.databaseId, table: tableName, entryId: query.where, field: query.get };
+    return await apiRequest("POST",`/api/field`, body);
   }
 
   async getEntries(tableName, query) {
@@ -78,7 +81,8 @@ class BsonDB {
     }
     let key = query.where;
     let value = query.is;
-    return await get(`/api/entries/${this.databaseId}/${tableName}/${key}/${value}`);
+    let body = { databaseId: this.databaseId, table: tableName, field: key, value };
+    return await apiRequest("POST", `/api/entries`, body);
   }
 }
 
