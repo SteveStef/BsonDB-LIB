@@ -1,4 +1,4 @@
-# Version 1.3.2
+# Version 1.3.3
 
 # Introduction
 
@@ -39,16 +39,8 @@ types that are not primitive.
 // =======================Example========================
 const BsonDB = require("bsondb-api");
 const db = new BsonDB(process.env.DATABASE_ID);
-db.getDatabase().then(response => console.log(response));
+db.getTable("Example_Table").then(response => console.log(response));
 // ======================================================
-
-/**
- * Fetches the database with the given ID.
- * @async
- * @function
- * @returns {Promise<Object>} A promise that resolves to the database object or An error object on fail.
- */
-function getDatabase() { /* ... */ }
 
 /**
  * Retrieves a specific table within a database.

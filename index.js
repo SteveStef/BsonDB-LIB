@@ -1,5 +1,6 @@
 const fetch = require('node-fetch');
 let server = "https://bsondb.up.railway.app";
+
 const defaultHeaders = {'Content-Type': 'application/json'};
 
 async function apiRequest (method, path, body = null) {

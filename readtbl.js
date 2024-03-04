@@ -4,9 +4,10 @@ const fs = require('fs');
 const path = require('path');
 const dir = path.dirname(__filename);
 const prodPath = path.join(dir, '../../tables.json');
-// const devPath = path.join(dir, 'tables.json');
+//const devPath = path.join(dir, 'tables.json');
 
-const server = "https://bsondb.up.railway.app";
+let server = "https://bsondb.up.railway.app";
+
 const defaultHeaders = {'Content-Type': 'application/json'};
 
 async function apiRequest (method, path, body = null) {
@@ -44,7 +45,10 @@ async function createTable(databaseId, tables) {
         }
       }
     }
+
     const response = await createTable(databaseID, tables);
+    console.log(response);
+
     if(response.error) {
       console.error("Error creating tables:");
       console.error(response.error);
