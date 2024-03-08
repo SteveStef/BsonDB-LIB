@@ -46,19 +46,19 @@ async function createTable(databaseId, tables) {
     }
 
     const response = await createTable(databaseID, tables);
-    console.log(response);
-
     if(response.error) {
       console.error("Error creating tables:");
       console.error(response.error);
       return;
     }
 
+    console.info("\n");
     console.info("Tables created successfully");
     console.info("Go to https://bsondb.netlify.app/ to view your database.");
+    console.info("\n");
 
   } catch(err) {
-    console.error("Error reading tables.json:");
+    console.error("Error reading tables.json");
     console.error(err);
   }
 })();

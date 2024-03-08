@@ -1,4 +1,4 @@
-# Version 1.3.4
+# Version 1.3.5
 
 # Introduction
 
@@ -16,6 +16,7 @@ as this database is still in beta.
 
 Visit bsondb.netlify.app to create a bsondb account.
 After signing up, you will be prompted with a database connection string
+After you recieve this connection string move on to the next step.
 
 # Installation / Setup
 
@@ -102,7 +103,7 @@ function updateEntry(tableName, query) { /* ... */ }
  * @async
  * @function
  * @param {string} tableName - The name of the table containing the entry.
- * @param {object} - query - an object in the form { where: 'value' }
+ * @param {object} - query - an object in the form { where: 'identifier' }
  * @returns {Promise<Object>} A promise that resolves to the entry update result or an erro object.
  */
 function deleteEntry(tableName, query) { /* ... */ }

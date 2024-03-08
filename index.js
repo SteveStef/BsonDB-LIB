@@ -26,7 +26,7 @@ class BsonDB {
 
   async updateEntry(table, query) {
     if(!query || !query.where || !query.set) {
-      console.error("Invalid query, use the form {where: string, set: object}");
+      console.error("Invalid query, use the form {where: 'identifier', set: object}");
       return null;
     }
     const body = { databaseId: this.databaseId, table, entryId: query.where, entry: query.set };
@@ -35,7 +35,7 @@ class BsonDB {
 
   async deleteEntry(table, query) {
     if(!query || !query.where) {
-      console.error("Invalid query, use the form {where: 'value'}");
+      console.error("Invalid query, use the form {where: 'identifier'}");
       return null;
     }
     let body = { databaseId: this.databaseId, table, entryId: query.where };
@@ -47,11 +47,6 @@ class BsonDB {
     return await apiRequest('POST', `/api/add-entry`, body);
   }
 
-  async getDatabase() {
-    let body = { databaseId: this.databaseId };
-    return await apiRequest("POST", `/api/database`, body);
-  }
-
   async getTable(tableName) {
     let body = { databaseId: this.databaseId, table: tableName};
     return await apiRequest("POST", `/api/table`, body);
@@ -59,7 +54,7 @@ class BsonDB {
 
   async getEntry(tableName, query) {
     if(!query || !query.where) {
-      console.error("Invalid query, use the form {where: 'value'}");
+      console.error("Invalid query, use the form {where: 'identifier'}");
       return null;
     }
     let body = { databaseId: this.databaseId, table: tableName, entryId: query.where };
@@ -68,7 +63,7 @@ class BsonDB {
 
   async getField(tableName, query) {
     if(!query || !query.where || !query.get) {
-      console.error("Invalid query, use the form {where: 'value', find: 'value'}");
+      console.error("Invalid query, use the form {where: 'identifier', get: 'field-name'}");
       return null;
     }
     let body = { databaseId: this.databaseId, table: tableName, entryId: query.where, field: query.get };
@@ -77,7 +72,7 @@ class BsonDB {
 
   async getEntries(tableName, query) {
     if(!query || !query.where || !query.is) {
-      console.error("Invalid query, use the form {where: 'value', is: 'value'}");
+      console.error("Invalid query, use the form {where: 'field', is: 'value'}");
       return null;
     }
     let key = query.where;
