@@ -1,4 +1,4 @@
-# Version 1.3.3
+# Version 1.3.4
 
 # Introduction
 
@@ -7,10 +7,15 @@ This README provides an overview of the BSON Database library,
 including the available functions and their usage. 
 
 In order to get a key please visit bsondb.netlify.app
-Here you are able to create/delete your database.
+Here you are able to View/create/delete your database.
 
 **Do NOT store any sensitive data in BsonDB for the time being
 as this database is still in beta.
+
+# Website Signup
+
+Visit bsondb.netlify.app to create a bsondb account.
+After signing up, you will be prompted with a database connection string
 
 # Installation / Setup
 
@@ -18,7 +23,9 @@ as this database is still in beta.
 
 After installation you will notice that it generates a tables.json
 file in your root directoy. Here you may design the stuctures of your
-tables. After designing your tables, enter the command:
+tables. Place you database connection string at the `databaseID` field.
+
+After designing your tables, enter the command:
 
 `npx bsondb-migrate`
 
@@ -26,7 +33,6 @@ This commands will migrate your current table structures into your database.
 Please note that when you are defining your types, the only available types
 are `string`, `number`, `boolean`, `object`. Use the `object` type for all
 types that are not primitive.
-
 
 # Usage
 

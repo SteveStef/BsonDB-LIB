@@ -86,5 +86,4 @@ class BsonDB {
     return await apiRequest("POST", `/api/entries`, body);
   }
 }
-
 module.exports = BsonDB;

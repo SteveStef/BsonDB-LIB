@@ -36,7 +36,6 @@ async function createTable(databaseId, tables) {
     const { databaseID, tables } = JSON.parse(data);
     const validTypes = ['string', 'number', 'boolean', 'object'];
     for(let i = 0; i < tables.length; i++) { 
-      tables[i].entries = {}; 
       for(let key in tables[i].entryTemplate) {
         if(!validTypes.includes(tables[i].entryTemplate[key])) {
           console.error(`Invalid type for ${key} in ${tables[i].name}`);
