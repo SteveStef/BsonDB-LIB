@@ -1,4 +1,4 @@
-# Version 1.3.6
+# Version 1.4.1
 
 # Introduction
 
@@ -46,7 +46,38 @@ types that are not primitive.
 // =======================Example========================
 const BsonDB = require("bsondb-api");
 const db = new BsonDB(process.env.DATABASE_ID);
-db.getTable("Example_Table").then(response => console.log(response));
+db.getTable("Example_Table").then(table => console.log(table));
+
+db.createEntry("Example_Table",{
+    email: "john@gmail.com",
+    password: "password123",
+    age: 24,
+    friendsList: ["Mike", "Steve"]
+}).then(response => console.log(response));
+
+db.updateEntry("Example_Table", {
+    where: "john@gmail.com",
+    set: {password: "password321", age: 25}
+}).then(response => console.log(response));
+
+db.getEntry("Example_Table", {
+    where: "john@gmail.com"
+}).then(entry => console.log(entry));
+
+db.getField("Example_Table", {
+    where: "john@gmail.com",
+    get: "friendsList"
+}).then(friends => console.log(friends));
+
+db.getEntries("Example_Table", {
+    where: "age", is: 25
+}).then(entries => console.log(entries));
+
+
+db.deleteEntry("Example_Table", {
+    where: "john@gmail.com"
+}).then(deleted => console.log(deleted));
+
 // ======================================================
 
 /**

@@ -1,22 +1,22 @@
-const fetch = require('node-fetch');
+const axios = require('axios');
 let server = "https://bsondb.up.railway.app";
 
 const defaultHeaders = {'Content-Type': 'application/json'};
 
-async function apiRequest (method, path, body = null) {
-  const requestOptions = {
-    method,
-    headers: defaultHeaders,
-    ...(body && { body: JSON.stringify(body) })
-  };
-  const url = `${server}${path}`;
-  try {
-    const response = await fetch(url, requestOptions);
-    return await response.json();
-  } catch (error) {
+async function apiRequest(method, path, body = null) {
+ const url = `${server}${path}`;
+ try {
+    const response = await axios({
+      method,
+      url,
+      headers: defaultHeaders,
+      data: body ? JSON.stringify(body) : undefined
+    });
+    return response.data;
+ } catch (error) {
     console.error("Internal Server Error");
     return null;
-  }
+ }
 };
 
 class BsonDB {
@@ -81,4 +81,5 @@ class BsonDB {
     return await apiRequest("POST", `/api/entries`, body);
   }
 }
+
 module.exports = BsonDB;
