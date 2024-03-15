@@ -14,7 +14,7 @@ async function apiRequest(method, path, body = null) {
     });
     return response.data;
  } catch (error) {
-    console.error("Internal Server Error");
+    if (error.response) return error.response.data
     return null;
  }
 };

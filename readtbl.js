@@ -22,10 +22,13 @@ async function apiRequest(method, path, body = null) {
       data: body ? JSON.stringify(body) : undefined
     });
     return response.data;
- } catch (error) {
-    console.error("Internal Server Error");
+  } catch (error) {
+    if (error.response) {
+      console.error("There was an error when generating tables: " + error.response.data.error);
+      return error.response.data
+    }
     return null;
- }
+  }
 };
 
 async function createTable(databaseId, tables) {
