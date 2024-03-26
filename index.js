@@ -4,8 +4,8 @@ let server = "https://bsondb.up.railway.app";
 const defaultHeaders = {'Content-Type': 'application/json'};
 
 async function apiRequest(method, path, body = null) {
- const url = `${server}${path}`;
- try {
+  const url = `${server}${path}`;
+  try {
     const response = await axios({
       method,
       url,
@@ -13,10 +13,10 @@ async function apiRequest(method, path, body = null) {
       data: body ? JSON.stringify(body) : undefined
     });
     return response.data;
- } catch (error) {
+  } catch (error) {
     if (error.response) return error.response.data
     return null;
- }
+  }
 };
 
 class BsonDB {

@@ -1,4 +1,4 @@
-# Version 1.4.2
+# Version 1.4.3
 
 # Introduction
 
@@ -43,7 +43,6 @@ types that are not primitive.
 
 ```js
 
-// =======================Example========================
 const BsonDB = require("bsondb-api");
 const db = new BsonDB(process.env.DATABASE_ID);
 db.getTable("Example_Table").then(table => console.log(table));
@@ -78,76 +77,6 @@ db.deleteEntry("Example_Table", {
     where: "john@gmail.com"
 }).then(deleted => console.log(deleted));
 
-// ======================================================
-
-/**
- * Retrieves a specific table within a database.
- * @async
- * @function
- * @param {string} tableName - The name of the table to retrieve.
- * @returns {Promise<Object>} A promise that resolves to the table object or An error object on fail.
- */
-function getTable(tableName) { /* ... */ }
-
-/**
- * Fetches a particular entry from a table within a database.
- * @async
- * @function
- * @param {string} tableName - The name of the table containing the entry.
- * @param {object} query - an object that contains { where: identifier }
- * @returns {Promise<Object>} A promise that resolves to the entry object or an error object.
- */
-function getEntry(tableName, query) { /* ... */ }
-
-/**
- * Obtains a specific field value from an entry within a table in a database.
- * @async
- * @function
- * @param {string} tableName - The name of the table containing the entry.
- * @param {object} query - an object that contains { where: identifier, get: field }
- * @returns {Promise<Object>} A promise that resolves to the field value or an error object.
- */
-function getField(tableName, query) { /* ... */ }
-
-/**
- * Adds a new entry to a table within a database.
- * @async
- * @function
- * @param {string} tableName - The name of the table to add the entry to.
- * @param {object} data - an object that you want to store 
- * @returns {Promise<Object>} A promise that resolves to the entry addition result or an error object.
- */
-function createEntry(tableName, data) { /* ... */ }
-
-/**
- * Updates an entry within a table in a database.
- * @async
- * @function
- * @param {string} tableName - The name of the table containing the entry.
- * @param {Object} query - an object in the form { where: identifier, set: { field: value } }
- * @returns {Promise<Object>} A promise that resolves to the entry update result or an error object.
- */
-function updateEntry(tableName, query) { /* ... */ }
-
-/**
- * Deletes an entire entry within a table in a database.
- * @async
- * @function
- * @param {string} tableName - The name of the table containing the entry.
- * @param {object} - query - an object in the form { where: 'identifier' }
- * @returns {Promise<Object>} A promise that resolves to the entry update result or an erro object.
- */
-function deleteEntry(tableName, query) { /* ... */ }
-
-/**
- * Deletes an entire entry within a table in a database.
- * @async
- * @function
- * @param {string} tableName - The name of the table containing the entry.
- * @param {object} query - an object in the form { where: field, is: value }
- * @returns {Promise<Object>} A promise that returns a list of all occurances of the key value pair in that table or an error obect.
- */
-function getEntries(tableName, query) { /* ... */ }
 ```
 
 # More info

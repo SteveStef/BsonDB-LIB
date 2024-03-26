@@ -49,11 +49,13 @@ rl.question('Are you sure you want to continue? All table data will be lost. (ye
         const { databaseID, tables } = JSON.parse(data);
         const validTypes = ['string', 'number', 'boolean', 'object'];
         for(let i = 0; i < tables.length; i++) { 
+
           if(!tables[i].identifier || !tables[i].name || !tables[i].entryTemplate || !tables[i].requires) {
             console.error("Invalid table object");
             console.error("Table object must have identifier, name, entryTemplate, and requires properties");
             return;
           }
+
           for(let key in tables[i].entryTemplate) {
             if(!validTypes.includes(tables[i].entryTemplate[key])) {
               console.error(`Invalid type for ${key} in ${tables[i].name}`);
@@ -74,7 +76,7 @@ rl.question('Are you sure you want to continue? All table data will be lost. (ye
           return;
         }
 
-        console.info(`${tables.length} tables have been created successfully.}`);
+        console.info(`${tables.length} tables have been created successfully.`);
         console.info("Go to https://bsondb.netlify.app/ to view your database.");
 
       } catch(err) {
