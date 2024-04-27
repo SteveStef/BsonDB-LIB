@@ -1,4 +1,4 @@
-# Version 1.4.3
+# Version 1.4.4
 
 # Introduction
 
@@ -14,7 +14,7 @@ as this database is still in beta.
 
 # Website Signup
 
-Visit bsondb.netlify.app to create a bsondb account.
+Visit https://bson-api.com/ to create a bsondb account.
 After signing up, you will be prompted with a database connection string
 After you recieve this connection string move on to the next step.
 
@@ -83,11 +83,8 @@ db.deleteEntry("Example_Table", {
 You are unable to post more than 1 MB of data to BsonDB in a single request due
 to memory limitaions
 
-If you are not recieving a verification code, try again tomorrow, the number of
-emails I can send per day is limited.
-
-Normal users are unable to create/delete their own database through this npm 
-library, please visit bsondb.netlify.app to create/delete a database.
+Users are unable to create/delete their own database through this npm 
+library, please visit https://bson-api.com/ to create/delete a database.
 
 If you have any questions/suggestions or concerns about BsonDB please contact me
 through my email: stephenstef456@gmail.com

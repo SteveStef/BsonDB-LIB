@@ -77,7 +77,7 @@ rl.question('Are you sure you want to continue? All table data will be lost. (ye
         }
 
         console.info(`${tables.length} tables have been created successfully.`);
-        console.info("Go to https://bsondb.netlify.app/ to view your database.");
+        console.info("Go to https://bson-api.com/ to view your database.");
 
       } catch(err) {
         console.error("Error reading tables.json");
